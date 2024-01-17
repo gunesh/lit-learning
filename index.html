@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>LitElement: Training exercises</title>
+  <script src="/node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+  <script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+  <style>
+    #panel {
+      font-family: arial;
+      padding: 1rem;
+    }
+    button {
+      font-size: 1rem;
+    }
+    #myLog {
+      padding: 1rem;
+      font-size: 1.1rem;
+      font-family: arial;
+      background-color: #222;
+      color: #eee;
+      max-height: 50vh;
+      overflow: scroll;
+    }
+  </style>
+  <script>
+    window.console.log = function(str){
+      const node = document.createElement("pre");
+      node.appendChild(document.createTextNode(str));
+      document.getElementById("myLog").appendChild(node);
+    }
+
+    async function runLifecycle() {
+      const el = document.querySelector('#myElement')
+      el.title = 'Movements'; //previous value was 'No title'
+      el.icon = 'book.ico'; //previous value was undefined
+      await el.updateComplete;
+    }
+  </script>  
+</head>
+<body>
+  <div id="panel">
+    <my-element id="myElement"></my-element>
+    <button onclick="runLifecycle()">Change elemenet props</button>
+  </div>
+  <div id="myLog"></div>
+
+
+</body>
+</html>
